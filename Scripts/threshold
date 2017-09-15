@@ -1,0 +1,13 @@
+%% Shock Threshold task
+% threshold(subject,run)
+% 
+% subject: string subject id
+% run: run number as string
+% 
+% NB - All input to the function mus be string
+% e.g., fci_learning('1234','1')
+%  by L Burleigh (lburleigh92@gmail.com)
+%
+
+
+%% Call Scripts
