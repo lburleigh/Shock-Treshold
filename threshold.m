@@ -65,20 +65,47 @@ while go;
         DrawFormattedText(w, sprintf('Proper shock intensity achieved'), 'center','center', 0);
         Screen('Flip', w);
         WaitSecs(2);
-        DrawFormattedText(w, sprintf('Prepare for one more shock'), 'center','center', 0);
+        DrawFormattedText(w, sprintf('Prepare for one more shock at a higher intensity'), 'center','center', 0);
         Flip2 = Screen('Flip', w);
         Screen('Flip',w, Flip2 + 3.995 - slack);
         DaqDOut(daq,0,EmShock);
         Screen('Flip',w, Flip2 + 4 - slack) ;
         DaqDOut(daq,0,EmOFF);
+        DrawFormattedText(w, sprintf('Was the shock...\n\n1. Too low/not uncomfortable\n\n2. Too high/painful\n\n3. Uncomfortable but not painful'), 'center','center', 0);
+        Screen('Flip',w);
         KbWait
-        keyCode(KB.SpaceBar)
-        go = false;
+        [keyIsDown, endSecs, keyCode] = KbCheck(-1);
+        if any(keyCode(KB.Resp1))
+            UserResp = 1;
+            DrawFormattedText(w, sprintf('Shock is too low'), 'center','center', 0);
+            Screen('Flip', w);
+            WaitSecs(2)
+            DrawFormattedText(w, sprintf('Waiting for Experimenter'), 'center','center', 0);
+            Screen('Flip', w);
+            KbWait
+            keyCode(KB.SpaceBar)
+            go = true;
+        elseif any(keyCode(KB.Resp2))
+            UserResp = 2;
+            DrawFormattedText(w, sprintf('Shock is too high'), 'center','center', 0);
+            Screen('Flip', w);
+            WaitSecs(2)
+            DrawFormattedText(w, sprintf('Waiting for Experimenter'), 'center','center', 0);
+            Screen('Flip', w);
+            KbWait
+            keyCode(KB.SpaceBar)
+            go = true;
+        elseif any(keyCode(KB.Resp3))
+            UserResp = 3;
+            DrawFormattedText(w, sprintf('Proper shock intensity achieved'), 'center','center', 0);
+            Screen('Flip', w);
+            keyCode(KB.SpaceBar)
+            go = false;
+        end
     end
-end
-
-
-
-Screen('CloseAll');
-
-
+end    
+    
+    
+    Screen('CloseAll');
+    
+    
