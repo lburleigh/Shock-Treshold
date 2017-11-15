@@ -36,7 +36,7 @@ while go;
     DaqDOut(daq,0,EmShock);
     Screen('Flip',w, Flip1 + 4 - slack) ;
     DaqDOut(daq,0,EmOFF);
-    DrawFormattedText(w, sprintf('Was the shock...\n\nIndex Finger: Too low/not uncomfortable\n\nMiddle Finger: Too high/painful\n\nRing Finger: Uncomfortable but not painful'), 'center','center', 0);
+    DrawFormattedText(w, sprintf('Was the shock...\n\n1. Too low/not uncomfortable\n\n2. Too high/painful\n\n3. Uncomfortable but not painful'), 'center','center', 0);
     Screen('Flip',w);
     KbWait
     [keyIsDown, endSecs, keyCode] = KbCheck(-1);
